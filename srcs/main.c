@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/06 11:44:43 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/12 10:07:05 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/12 14:02:20 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	main(int ac, char **av)
 {
-	t_philo	*philo;
+	t_rules	rules;
 
-	philo = NULL;
-	philo = init_philo(philo);
 	if (ac < 2)
 		write(1, "Error: too few arguments.\n", 27);
-	parser(philo, ac, av);
+	init_rules(&rules, ac, av);
+	print_rules(&rules);
+//	system("leaks philo");
 	return (0);
 }

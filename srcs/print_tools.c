@@ -6,15 +6,15 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/06 12:15:25 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/06 12:42:01 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/12 13:58:15 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	print_rules(t_philo *philo)
+void	print_rules(t_rules *philo)
 {
-	printf("\033[85;1m\033[38;5;178m  PROGRAM RULES ARE:  \033[m\033[m\n\n");
+	printf("\033[85;1m\033[38;5;178m\n  PROGRAM RULES ARE:  \033[m\033[m\n\n");
 	printf("\033[85;1m\033[38;5;209m  number of philosophers: %i \033[m\033[m\n", philo->nb);
 	printf("\033[85;1m\033[38;5;209m  number of forks:        %i \033[m\033[m\n", philo->nb);
 	printf("\033[85;1m\033[38;5;106m  time to die:            %ims \033[m\033[m\n", philo->die_time);

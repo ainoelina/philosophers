@@ -6,7 +6,7 @@
 #    By: avuorio <avuorio@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/10/06 11:33:02 by avuorio       #+#    #+#                  #
-#    Updated: 2021/10/12 10:59:47 by avuorio       ########   odam.nl          #
+#    Updated: 2021/10/12 13:59:25 by avuorio       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		= philo
 SRC_FILES	= main.c \
 				error.c \
 				init.c \
-				parser.c \
+				time.c \
 				utils.c \
 				print_tools.c
 
