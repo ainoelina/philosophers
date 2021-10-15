@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/13 09:40:53 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/15 12:04:09 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/15 12:16:33 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	*new_thread(void *arg)
 
 	p_i = (t_philo *)arg;
 	rules = p_i->rules;
-	printf("creating thread for philosopher nb %i\n", p_i->id);
 	while (rules->dead == 0)
 	{
 		eat(p_i, rules);
@@ -29,10 +28,10 @@ void	*new_thread(void *arg)
 		timer(rules->sleep_time, rules);
 		log_status(rules, p_i->id, THINK);
 	}
-	pthread_mutex_unlock(&(rules->forks[p_i->fork_left]));
-	printf("~~~~~~~ fork nr %i unlocked\n", p_i->fork_left);
-	pthread_mutex_unlock(&(rules->forks[p_i->fork_right]));
-	printf("~~~~~~~ fork nr %i unlocked\n", p_i->fork_right);
+	// pthread_mutex_unlock(&(rules->forks[p_i->fork_left]));
+	// printf("~~~~~~~ fork nr %i unlocked\n", p_i->fork_left);
+	// pthread_mutex_unlock(&(rules->forks[p_i->fork_right]));
+	// printf("~~~~~~~ fork nr %i unlocked\n", p_i->fork_right);
 	return (NULL);
 }
 
@@ -69,7 +68,6 @@ void	start_threads(t_rules *rules)
 	t_philo	*philo;
 	int		i;
 
-	printf("where\n");
 	rules->start = get_time();
 	i = 0;
 	philo = rules->philo;

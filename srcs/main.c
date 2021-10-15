@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/13 07:55:28 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/15 11:09:46 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/15 12:11:23 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int	main(int ac, char **av)
 		return (1);
 	print_rules(&rules);
 	start_threads(&rules);
-	system("leaks philo");
+//	system("leaks philo");
 	return (0);
 }
