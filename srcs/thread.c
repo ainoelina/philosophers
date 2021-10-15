@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/13 09:40:53 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/15 12:16:33 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/15 12:49:17 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,6 @@ void	*new_thread(void *arg)
 		timer(rules->sleep_time, rules);
 		log_status(rules, p_i->id, THINK);
 	}
-	// pthread_mutex_unlock(&(rules->forks[p_i->fork_left]));
-	// printf("~~~~~~~ fork nr %i unlocked\n", p_i->fork_left);
-	// pthread_mutex_unlock(&(rules->forks[p_i->fork_right]));
-	// printf("~~~~~~~ fork nr %i unlocked\n", p_i->fork_right);
 	return (NULL);
 }
 
@@ -56,7 +52,7 @@ void	check_death(t_philo *philo, t_rules *rules)
 		}
 		if (rules->dead == 1)
 			break ;
-		while (rules->eat_nb != -1 && i < rules->nb && philo[i].meal_count >= rules->eat_nb)
+		while (rules->eat_nb != -1 && i < rules->nb && philo[i].meal_count <= rules->eat_nb)
 			i++;
 		if (i == rules->nb)
 			rules->done = 1;

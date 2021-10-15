@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/06 11:27:02 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/15 11:33:54 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/15 12:22:16 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <sys/time.h>
+# include "colours.h"
 
 enum e_status {FORK, EAT, SLEEP, THINK, DED, FINISHED};
 
