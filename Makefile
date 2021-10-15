@@ -6,14 +6,17 @@
 #    By: avuorio <avuorio@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/10/06 11:33:02 by avuorio       #+#    #+#                  #
-#    Updated: 2021/10/12 13:59:25 by avuorio       ########   odam.nl          #
+#    Updated: 2021/10/15 09:39:19 by avuorio       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= philo
 
 SRC_FILES	= main.c \
-				error.c \
+				thread.c \
+				action.c \
+				log.c \
+				exit.c \
 				init.c \
 				time.c \
 				utils.c \
@@ -38,7 +41,7 @@ $(NAME): $(OBJS)
 	@echo "\\n\033[35;1m  program ./philo created\033[0m \\n"
 
 $(OBJS_DIR)%.o: $(DIR)%.c
-	@echo "\\033[2;1m\n  compiling $<...\033[0m"
+	@echo "\\033[2;1m  compiling $<...\033[0m"
 	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADER)
 
