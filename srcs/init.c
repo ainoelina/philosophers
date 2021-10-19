@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 09:56:52 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/15 11:34:26 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/19 12:59:58 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	init_philosophers(t_rules *rules)
 	rules->forks = malloc(sizeof(pthread_mutex_t) * rules->nb);
 	if (!rules->forks)
 		return (1);
-	while (i <= rules->nb)
+	while (i < rules->nb)
 	{
 		rules->philo[i].id = i;
 		rules->philo[i].full = 0;

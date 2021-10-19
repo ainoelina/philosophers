@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/13 07:55:28 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/15 12:11:23 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/19 12:20:16 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ int	main(int ac, char **av)
 {
 	t_rules	rules;
 
+	memset(&rules, 0, sizeof(t_rules));
 	if (ac < 5 || ac > 6)
 		printf("Error: wrong number of arguments\n");
 	if (init_rules(&rules, ac, av))
 		return (1);
-	print_rules(&rules);
+//	print_rules(&rules);
 	start_threads(&rules);
 //	system("leaks philo");
 	return (0);

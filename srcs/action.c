@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/15 08:29:31 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/15 12:33:45 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/19 13:16:39 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void	timer(long long duration, t_rules *rules)
 
 void	eat(t_philo *philo, t_rules *rules)
 {
-	if (pthread_mutex_lock(&rules->forks[philo->fork_left]) == -1)
-		philo_error("Error: mutex lock failed.\n", rules);
+	pthread_mutex_lock(&rules->forks[philo->fork_left]);
 	log_status(rules, philo->id, FORK);
-	if (pthread_mutex_lock(&rules->forks[philo->fork_right]) == -1)
-		philo_error("Error: mutex lock failed.\n", rules);
+	pthread_mutex_lock(&rules->forks[philo->fork_right]);
 	log_status(rules, philo->id, FORK);
+	pthread_mutex_lock(&rules->meal);
 	log_status(rules, philo->id, EAT);
 	philo->last_ate = get_time();
+	pthread_mutex_unlock(&rules->meal);
 	timer(rules->eat_time, rules);
 	philo->meal_count++;
 	pthread_mutex_unlock(&(rules->forks[philo->fork_left]));

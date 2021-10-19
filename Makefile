@@ -6,7 +6,7 @@
 #    By: avuorio <avuorio@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/10/06 11:33:02 by avuorio       #+#    #+#                  #
-#    Updated: 2021/10/15 09:39:19 by avuorio       ########   odam.nl          #
+#    Updated: 2021/10/19 10:15:50 by avuorio       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJS_DIR	= objs/
 
 HEADER		= -I ./includes
 
-CFLAGS		= -Wall -Werror -Wextra -pedantic
+CFLAGS		= -Wall -Werror -Wextra -pedantic -g
 RM			= rm -f
 
 all:		$(NAME)
