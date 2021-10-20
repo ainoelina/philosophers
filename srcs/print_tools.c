@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/06 12:15:25 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/15 12:48:09 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/20 13:59:33 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_rules(t_rules *philo)
 	printf(B_MINT "  time to die:            %ims\n" RESET, philo->die_time);
 	printf(B_CORAL "  time to eat:            %ims\n" RESET, philo->eat_time);
 	printf(B_YELLOW "  time to sleep:          %ims\n" RESET, philo->sleep_time);
-	if (philo->eat_nb != -1)
-		printf("\033[85;1m\033[38;5;111m  number times to eat:    %i \033[m\033[m\n", philo->eat_nb);
+	if (philo->eat_count != -1)
+		printf("\033[85;1m\033[38;5;111m  number times to eat:    %i \033[m\033[m\n", philo->eat_count);
 	printf("\n");
 }

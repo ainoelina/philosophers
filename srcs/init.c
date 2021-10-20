@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 09:56:52 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/19 12:59:58 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/20 12:41:38 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,19 @@ int	init_philosophers(t_rules *rules)
 	int	i;
 
 	i = 0;
-	rules->philo = malloc(sizeof(t_rules) * rules->nb);
-	if (!rules->philo)
-		return (1);
-	rules->forks = malloc(sizeof(pthread_mutex_t) * rules->nb);
-	if (!rules->forks)
-		return (1);
 	while (i < rules->nb)
 	{
 		rules->philo[i].id = i;
-		rules->philo[i].full = 0;
+		rules->philo[i].eating_now = 0;
+//		rules->philo[i].full = 0;
 		rules->philo[i].meal_count = 0;
 		rules->philo[i].last_ate = 0;
 		rules->philo[i].fork_left = i;
 		rules->philo[i].fork_right = (i + 1) % rules->nb;
 		rules->philo[i].rules = rules;
+		pthread_mutex_init(&rules->philo[i].lock, NULL);
+		pthread_mutex_init(&rules->philo[i].eating, NULL);
+		pthread_mutex_lock(&rules->philo[i].eating);
 		i++;
 	}
 	return (0);
@@ -58,6 +56,10 @@ int	init_mutex(t_rules *rules)
 {
 	int	i;
 
+	i = rules->nb;
+	rules->forks = (pthread_mutex_t *)malloc(sizeof(*(rules->forks)) * i);
+	if (!rules->forks)
+		return (1);
 	i = 0;
 	while (i <= rules->nb)
 	{
@@ -65,9 +67,9 @@ int	init_mutex(t_rules *rules)
 			return (1);
 		i++;
 	}
-	if (pthread_mutex_init(&(rules->log), NULL))
+	if (pthread_mutex_init(&rules->log, NULL))
 		return (1);
-	if (pthread_mutex_init(&(rules->meal), NULL))
+	if (pthread_mutex_init(&rules->deceased, NULL))
 		return (1);
 	return (0);
 }
@@ -87,14 +89,17 @@ int	init_rules(t_rules *rules, int ac, char **av)
 	rules->start = 0;
 	rules->done = 0;
 	rules->dead = 0;
+	rules->philo = malloc(sizeof(*(rules->philo)) * rules->nb);
+	if (!rules->philo)
+		return (philo_error("Error: malloc failed.\n", rules));
 	if (ac == 6)
 	{
-		rules->eat_nb = my_atoi(av[5]);
-		if (rules->eat_nb <= 0)
+		rules->eat_count = my_atoi(av[5]);
+		if (rules->eat_count <= 0)
 			return (philo_error("Error: argument input invalid.\n", rules));
 	}
 	else
-		rules->eat_nb = -1;
+		rules->eat_count = -1;
 	if (check_arguments(rules))
 		return (philo_error("Error: argument input invalid.\n", rules));
 	if (init_philosophers(rules))

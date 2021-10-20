@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/13 09:40:53 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/19 13:36:56 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/20 14:47:38 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ void	*new_thread(void *arg)
 		usleep(15000);
 	while (rules->dead == 0)
 	{
+		take_forks(rules, philo);
 		eat(philo, rules);
-		if (rules->done)
-			break ;
-		log_status(rules, philo->id, SLEEP);
-		timer(rules->sleep_time, rules);
+		go_to_sleep(rules, philo);
 		log_status(rules, philo->id, THINK);
 	}
 	return (NULL);
@@ -48,20 +46,20 @@ void	check_death(t_philo *philo, t_rules *rules)
 		i = 0;
 		while (i < rules->nb && !(rules->dead))
 		{
-			pthread_mutex_lock(&rules->meal);
+			pthread_mutex_lock(&philo->lock);
 			diff = get_time() - philo[i].last_ate;
 			if (diff > rules->die_time)
 			{
 				log_status(rules, i, DED);
 				rules->dead = 1;
 			}
-			pthread_mutex_unlock(&rules->meal);
+			pthread_mutex_unlock(&philo->lock);
 			usleep(100);
 			i++;
 		}
 		if (rules->dead == 1)
 			break ;
-		while (rules->eat_nb != -1 && i < rules->nb && philo[i].meal_count >= rules->eat_nb)
+		while (rules->eat_count != -1 && i < rules->nb && philo[i].meal_count >= rules->eat_count)
 			i++;
 		if (i == rules->nb)
 			rules->done = 1;
