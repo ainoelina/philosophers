@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/12 10:00:26 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/15 10:42:52 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/20 14:56:11 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,14 @@ void	exit_program(t_rules *rules)
 	i = 0;
 	while (i < rules->nb)
 	{
-		pthread_mutex_destroy(&(rules->forks[i]));
+		pthread_mutex_destroy(&rules->forks[i]);
 		i++;
 	}
-	pthread_mutex_destroy(&(rules->log));
+	i = 0;
+	while (i < rules->nb)
+	{
+		pthread_mutex_destroy(&rules->philo[i].lock);
+		i++;
+	}
+	pthread_mutex_destroy(&rules->log);
 }
