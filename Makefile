@@ -6,21 +6,19 @@
 #    By: avuorio <avuorio@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/10/06 11:33:02 by avuorio       #+#    #+#                  #
-#    Updated: 2021/10/20 13:59:50 by avuorio       ########   odam.nl          #
+#    Updated: 2021/10/27 14:27:36 by avuorio       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= philo
 
 SRC_FILES	= main.c \
-				thread.c \
+				initialise.c \
+				threading.c \
 				action.c \
 				log.c \
 				exit.c \
-				init.c \
-				time.c \
-				utils.c \
-				print_tools.c
+				utils.c
 
 SRCS		= $(addprefix srcs/, $(SRC_FILES))
 DIR			= srcs/

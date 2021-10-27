@@ -5,41 +5,41 @@
 /*                                                     +:+                    */
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/10/12 10:00:26 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/20 14:56:11 by avuorio       ########   odam.nl         */
+/*   Created: 2021/10/27 08:06:40 by avuorio       #+#    #+#                 */
+/*   Updated: 2021/10/27 10:30:21 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	philo_error(char *message, t_rules *rules)
-{
-	printf("%s\n", message);
-	rules = NULL;
-	return (1);
-}
+/*
+** delete unnecessary printf statements 
+** fix freeing part of error function
+** or ACTUALLY make a separate clear -function
+*/
 
-void	exit_program(t_rules *rules)
+int	delete_mutex(t_rules *rules)
 {
 	int	i;
 
 	i = 0;
 	while (i < rules->nb)
 	{
-		pthread_join(rules->philo[i].thread, NULL);
+		printf(B_GREEN "mutex nro %i destroyed\n" RESET, i + 1);
+		if (pthread_mutex_destroy(&rules->forks[i]))
+			return (1);
 		i++;
 	}
-	i = 0;
-	while (i < rules->nb)
-	{
-		pthread_mutex_destroy(&rules->forks[i]);
-		i++;
-	}
-	i = 0;
-	while (i < rules->nb)
-	{
-		pthread_mutex_destroy(&rules->philo[i].lock);
-		i++;
-	}
-	pthread_mutex_destroy(&rules->log);
+	if (pthread_mutex_destroy(&rules->log))
+		return (1);
+	return (0);
+}
+
+int	error(char *message, t_rules *rules)
+{
+	printf(B_RED "Error: " RESET);
+	printf(ITALIC "%s\n" RESET, message);
+	if (rules)
+		free (rules);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/15 12:18:00 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/15 12:48:23 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/27 10:28:32 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # define B_PURPLE "\033[85;1m\033[38;5;55m"
 # define B_CORAL "\033[85;1m\033[38;5;203m"
 
+# define ITALIC "\033[3;37m"
+# define ITALIC_RESET "3;37\033[m"
 # define RESET "\033[0m"
 
 #endif
