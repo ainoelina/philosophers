@@ -6,11 +6,16 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 07:41:21 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/27 10:33:06 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/27 14:49:25 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+/*
+** 27 Oct / figure out what is the issue with the timestamp being all weird
+** do the deatch check function
+*/
 
 /*
 ** change return values and create error function

@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 09:52:27 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/27 14:25:32 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/02 07:33:35 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,15 @@ void	*routine(void *arg)
 			break ;
 		}
 		log_status(rules, philo->id, SLEEP);
-		usleep(rules->sleep_time * 1000);
+		sleeper(rules->sleep_time);
 		log_status(rules, philo->id, THINK);
 	}
 	return (NULL);
 }
+
+/*
+** threading function creates
+*/
 
 int	threading(t_rules *rules, t_philo *philo)
 {

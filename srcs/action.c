@@ -6,11 +6,25 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 11:58:35 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/27 14:23:32 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/02 07:33:46 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	sleeper(long long duration)
+{
+	long long	time;
+	long long	temp;
+
+	time = get_time() + duration;
+	temp = 0;
+	while (temp < time)
+	{
+		temp = get_time();
+		usleep(50);
+	}
+}
 
 int	get_forks(t_rules *rules, t_philo *philo)
 {
@@ -29,7 +43,7 @@ int	eat(t_rules *rules, t_philo *philo)
 		return (1);
 	log_status(rules, philo->id, EAT);
 	philo->last_ate = get_time();
-	usleep(rules->eat_time * 1000);
+	sleeper(rules->eat_time);
 	if (pthread_mutex_unlock(&rules->lock))
 		return (1);
 	philo->meal_count++;

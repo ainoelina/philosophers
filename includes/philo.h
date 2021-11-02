@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 07:51:08 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/27 14:25:19 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/10/27 15:13:57 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int			threading(t_rules *rules, t_philo *philo);
 /* ~~~~~~~ ACTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~ */
 int			get_forks(t_rules *rules, t_philo *philo);
 int			eat(t_rules *rules, t_philo *philo);
+void		sleeper(long long duration);
 
 /* ~~~~~~~ LOG ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 void		log_status(t_rules *rules, int id, int status);
