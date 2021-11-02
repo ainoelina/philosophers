@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 08:06:40 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/27 10:30:21 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/02 11:54:27 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,21 @@ int	delete_mutex(t_rules *rules)
 	return (0);
 }
 
+int	free_all(t_rules *rules)
+{
+	if (!rules)
+		return (0);
+	if (rules->forks)
+		free (rules->forks);
+	if (rules->philo)
+		free (rules->philo);
+	return (1);
+}
+
 int	error(char *message, t_rules *rules)
 {
 	printf(B_RED "Error: " RESET);
 	printf(ITALIC "%s\n" RESET, message);
-	if (rules)
-		free (rules);
+	free_all(rules);
 	return (1);
 }

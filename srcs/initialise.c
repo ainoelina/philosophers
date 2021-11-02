@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 07:52:34 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/27 10:31:11 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/02 11:13:22 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_rules(t_rules *rules, int ac)
 {
-	if (rules->nb > 250 || rules->nb < 1)
+	if (rules->nb > 250 || rules->nb < 2)
 		return (1);
 	if (rules->die_time < 0 || rules->eat_time < 0 || rules->sleep_time < 0)
 		return (1);

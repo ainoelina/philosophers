@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 07:51:08 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/27 15:13:57 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/02 11:55:10 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,10 @@ typedef struct s_philo
 	int				fork_left;
 	int				fork_right;
 	int				id;
-//	int				full;
-//	int				eating_now;
 	int				meal_count;
 	long long		last_ate;
 	long long		time;
-//	pthread_mutex_t	lock;
+	pthread_mutex_t	lock;
 //	pthread_mutex_t	eating;
 }				t_philo;
 
@@ -73,6 +71,7 @@ void		log_status(t_rules *rules, int id, int status);
 /* ~~~~~~~ EXIT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 int			error(char *message, t_rules *rules);
 int			delete_mutex(t_rules *rules);
+int			free_all(t_rules *rules);
 
 /* ~~~~~~~ UTILS ~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 int			my_atoi(char *str);
