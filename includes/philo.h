@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 07:51:08 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/11/02 11:55:10 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/02 13:10:06 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_philo
 	long long		last_ate;
 	long long		time;
 	pthread_mutex_t	lock;
-//	pthread_mutex_t	eating;
 }				t_philo;
 
 typedef struct s_rules

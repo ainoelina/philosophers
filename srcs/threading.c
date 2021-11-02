@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 09:52:27 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/11/02 07:33:35 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/02 13:11:49 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	*routine(void *arg)
 	rules = philo->rules;
 	if (philo->id % 2)
 		usleep(15000);
-	while (!rules->done)
+	while (!rules->done && !rules->dead)
 	{
 		if (get_forks(rules, philo))
 			break ;
@@ -53,9 +53,36 @@ void	*routine(void *arg)
 ** threading function creates
 */
 
+void	*check_death(void *arg)
+{
+	t_philo	*philo;
+	t_rules	*rules;
+	int		i;
+
+	philo = arg;
+	rules = philo->rules;
+	i = 0;
+	while (i < rules->nb && !rules->dead)
+	{
+		pthread_mutex_lock(&rules->lock);
+		if (get_time() - philo->last_ate > rules->die_time)
+		{
+			log_status(rules, philo->id, DED);
+			rules->dead = 1;
+		}
+		i++;
+		pthread_mutex_unlock(&rules->lock);
+		if (rules->dead)
+			break ;
+		usleep(100);
+	}
+	return (NULL);
+}
+
 int	threading(t_rules *rules, t_philo *philo)
 {
-	int	i;
+	int			i;
+//	pthread_t	checker;
 
 	i = 0;
 	rules->start = get_time();
@@ -63,6 +90,8 @@ int	threading(t_rules *rules, t_philo *philo)
 	{
 		if (pthread_create(&philo[i].thread, NULL, routine, &philo[i]))
 			return (error("thread creation failed", rules));
+//		if (pthread_create(&checker, NULL, check_death, &philo[i]))
+//			return (error("thread creation failed", rules));
 		i++;
 	}
 	i = 0;
