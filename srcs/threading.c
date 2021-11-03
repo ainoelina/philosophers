@@ -6,24 +6,11 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 09:52:27 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/11/03 11:45:04 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/03 14:17:35 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	philo_check(t_rules *rules, t_philo *philo)
-{
-	if (philo->meal_count > 0)
-		rules->fed++;
-	if (rules->fed == rules->eat_count * rules->nb)
-	{
-		rules->done = 1;
-		log_status(rules, 0, FINISHED);
-		return (1);
-	}
-	return (0);
-}
 
 void	*routine(void *arg)
 {
@@ -32,8 +19,8 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	rules = philo->rules;
-//	if (philo->id % 2)
-//		usleep(15000);
+	if (philo->id % 2)
+		usleep(15000);
 	while (!rules->dead)
 	{
 		if (get_forks(rules, philo))
@@ -42,8 +29,6 @@ void	*routine(void *arg)
 			break ;
 		if (rules->done)
 			break ;
-		if (rules->eat_count > 0 && philo_check(rules, philo))
-			break ;
 		log_status(rules, philo->id, SLEEP);
 		sleeper(rules->sleep_time);
 		log_status(rules, philo->id, THINK);
@@ -51,26 +36,41 @@ void	*routine(void *arg)
 	return (NULL);
 }
 
-/*
-** threading function creates
-*/
+void	check_philo(t_rules *rules, t_philo *philo, int i)
+{
+	if (get_time() - philo[i].last_ate > rules->die_time)
+	{
+		log_status(rules, i, DED);
+		rules->dead = 1;
+	}
+}
 
 void	check_death(t_rules *rules, t_philo *philo)
 {
 	int	i;
 
 	i = 0;
-	while (i < rules->nb && !rules->dead)
+	while (!rules->done)
 	{
-		pthread_mutex_lock(&rules->lock);
-		if (get_time() - philo->last_ate > rules->die_time)
+		while (i < rules->nb && !rules->dead)
 		{
-			log_status(rules, i, DED);
-			rules->dead = 1;
+			pthread_mutex_lock(&rules->lock);
+			check_philo(rules, philo, i);
+			pthread_mutex_unlock(&rules->lock);
+			usleep(100);
+			i++;
 		}
-		pthread_mutex_unlock(&rules->lock);
-		usleep(50);
-		i++;
+		if (rules->dead)
+			break ;
+		i = 0;
+		while (rules->eat_count != -1 && i < rules->nb
+			&& philo[i].meal_count >= rules->eat_count)
+			i++;
+		if (i == rules->nb)
+		{	
+			log_status(rules, 0, FINISHED);
+			rules->done = 1;
+		}
 	}
 }
 
@@ -84,8 +84,7 @@ int	threading(t_rules *rules, t_philo *p)
 	{
 		if (pthread_create(&p[i].thread, NULL, routine, &p[i]))
 			return (error("thread creation failed", rules));
-		p->last_ate = get_time();
-		usleep(1500);
+		p[i].last_ate = get_time();
 		i++;
 	}
 	check_death(rules, p);

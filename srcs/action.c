@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 11:58:35 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/11/03 11:10:07 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/03 13:41:33 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	eat(t_rules *rules, t_philo *philo)
 		return (1);
 	log_status(rules, philo->id, EAT);
 	philo->last_ate = get_time();
-	sleeper(rules->eat_time);
 	if (pthread_mutex_unlock(&rules->lock))
 		return (1);
+	sleeper(rules->eat_time);
 	philo->meal_count++;
 	if (pthread_mutex_unlock(&rules->forks[philo->fork_left]))
 		return (1);
