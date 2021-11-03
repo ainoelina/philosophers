@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 07:51:08 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/11/02 13:10:06 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/03 11:35:32 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_philo
 	int				meal_count;
 	long long		last_ate;
 	long long		time;
-	pthread_mutex_t	lock;
 }				t_philo;
 
 typedef struct s_rules
@@ -57,7 +56,8 @@ typedef struct s_rules
 int			init_rules(t_rules *rules, char **av, int ac);
 
 /* ~~~~~~~ PROGRAM ~~~~~~~~~~~~~~~~~~~~~~~~~ */
-int			threading(t_rules *rules, t_philo *philo);
+int			threading(t_rules *rules, t_philo *p);
+int			launcher(t_rules *rules);
 
 /* ~~~~~~~ ACTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~ */
 int			get_forks(t_rules *rules, t_philo *philo);

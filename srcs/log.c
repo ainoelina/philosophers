@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 12:05:45 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/11/02 12:04:12 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/03 07:45:41 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	log_status(t_rules *rules, int id, int status)
 		if (status == THINK)
 			printf("%4lli Philosopher %i is thinking\n", timestamp, id + 1);
 	}
-	if (status == DED && rules->dead == 1)
+	if (status == DED)
 		printf("%4lli Philosopher %i died\n", timestamp, id + 1);
 	if (status == FINISHED && rules->dead == 0)
 		printf("%4lli All philosophers have been fed\n", timestamp);

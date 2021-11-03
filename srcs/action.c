@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 11:58:35 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/11/02 11:57:44 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/03 11:10:07 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	sleeper(long long duration)
 	while (temp < time)
 	{
 		temp = get_time();
-		usleep(20);
+		usleep(50);
 	}
 }
 
