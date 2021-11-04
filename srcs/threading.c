@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 09:52:27 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/11/03 14:17:35 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/03 14:59:39 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	*routine(void *arg)
 
 	philo = (t_philo *)arg;
 	rules = philo->rules;
-	if (philo->id % 2)
-		usleep(15000);
 	while (!rules->dead)
 	{
 		if (get_forks(rules, philo))
@@ -85,6 +83,7 @@ int	threading(t_rules *rules, t_philo *p)
 		if (pthread_create(&p[i].thread, NULL, routine, &p[i]))
 			return (error("thread creation failed", rules));
 		p[i].last_ate = get_time();
+		usleep(1000);
 		i++;
 	}
 	check_death(rules, p);

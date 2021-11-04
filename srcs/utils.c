@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 07:57:49 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/10/27 14:24:58 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/03 14:58:09 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ long long	get_time(void)
 
 int	my_atoi(char *str)
 {
-	int	nb;
-	int	sign;
-	int	index;
+	long long	nb;
+	int			sign;
+	int			index;
 
 	if (!str)
 		return (0);
@@ -45,5 +45,7 @@ int	my_atoi(char *str)
 		index++;
 	}
 	nb = nb * sign;
-	return (nb);
+	if (nb < -2147483648 || nb > 2147483647)
+		return (-1);
+	return ((int)nb);
 }

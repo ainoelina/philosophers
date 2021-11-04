@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 07:51:08 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/11/03 13:52:23 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/03 14:39:21 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdio.h>
 # include <sys/time.h>
 # include <string.h>
-# include "colours.h"
 
 enum e_status {FORK, EAT, SLEEP, THINK, DED, FINISHED};
 
@@ -32,7 +31,6 @@ typedef struct s_philo
 	int				id;
 	int				meal_count;
 	long long		last_ate;
-	long long		time;
 }				t_philo;
 
 typedef struct s_rules
@@ -42,7 +40,6 @@ typedef struct s_rules
 	int				die_time;
 	int				sleep_time;
 	int				eat_count;
-	int				fed;
 	int				dead;
 	int				done;
 	long long		start;
@@ -57,7 +54,6 @@ int			init_rules(t_rules *rules, char **av, int ac);
 
 /* ~~~~~~~ PROGRAM ~~~~~~~~~~~~~~~~~~~~~~~~~ */
 int			threading(t_rules *rules, t_philo *p);
-int			launcher(t_rules *rules);
 
 /* ~~~~~~~ ACTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~ */
 int			get_forks(t_rules *rules, t_philo *philo);

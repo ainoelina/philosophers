@@ -6,17 +6,11 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 08:06:40 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/11/02 11:54:27 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/03 14:31:47 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-/*
-** delete unnecessary printf statements 
-** fix freeing part of error function
-** or ACTUALLY make a separate clear -function
-*/
 
 int	delete_mutex(t_rules *rules)
 {
@@ -25,7 +19,6 @@ int	delete_mutex(t_rules *rules)
 	i = 0;
 	while (i < rules->nb)
 	{
-		printf(B_GREEN "mutex nro %i destroyed\n" RESET, i + 1);
 		if (pthread_mutex_destroy(&rules->forks[i]))
 			return (1);
 		i++;
@@ -48,8 +41,7 @@ int	free_all(t_rules *rules)
 
 int	error(char *message, t_rules *rules)
 {
-	printf(B_RED "Error: " RESET);
-	printf(ITALIC "%s\n" RESET, message);
+	printf("Error: %s\n", message);
 	free_all(rules);
 	return (1);
 }
