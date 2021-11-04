@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 11:58:35 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/11/03 13:41:33 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/04 10:49:05 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void	sleeper(long long duration)
 
 int	get_forks(t_rules *rules, t_philo *philo)
 {
+	if (philo->fork_left == philo->fork_right)
+	{
+		log_status(rules, philo->id, FORK);
+		return (1);
+	}
 	if (pthread_mutex_lock(&rules->forks[philo->fork_left]))
 		return (1);
 	log_status(rules, philo->id, FORK);
