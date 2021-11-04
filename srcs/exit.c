@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 08:06:40 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/11/03 14:31:47 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/04 11:37:08 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	free_all(t_rules *rules)
 
 int	error(char *message, t_rules *rules)
 {
-	printf("Error: %s\n", message);
+	printf(YELLOW "Error: %s\n" RESET, message);
 	free_all(rules);
 	return (1);
 }

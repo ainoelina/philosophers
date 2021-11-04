@@ -6,7 +6,7 @@
 /*   By: avuorio <avuorio@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/27 12:05:45 by avuorio       #+#    #+#                 */
-/*   Updated: 2021/11/03 14:28:16 by avuorio       ########   odam.nl         */
+/*   Updated: 2021/11/04 11:39:42 by avuorio       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 void	log_status(t_rules *rules, int id, int status)
 {
-	long long	timestamp;
+	long long	stamp;
 
 	pthread_mutex_lock(&rules->log);
-	timestamp = get_time() - rules->start;
+	stamp = get_time() - rules->start;
 	if (rules->done == 0 && rules->dead == 0)
 	{
 		if (status == FORK)
-			printf("%-8lli %i has taken a fork\n", timestamp, id + 1);
+			printf("%-8lli Philosopher %i has taken a fork\n", stamp, id + 1);
 		if (status == EAT)
-			printf("%-8lli %i is eating\n", timestamp, id + 1);
+			printf("%-8lli Philosopher %i is eating\n", stamp, id + 1);
 		if (status == SLEEP)
-			printf("%-8lli %i is sleeping\n", timestamp, id + 1);
+			printf("%-8lli Philosopher %i is sleeping\n", stamp, id + 1);
 		if (status == THINK)
-			printf("%-8lli %i is thinking\n", timestamp, id + 1);
+			printf("%-8lli Philosopher %i is thinking\n", stamp, id + 1);
 	}
 	if (status == DED)
-		printf("%-8lli %i died\n", timestamp, id + 1);
+		printf("%-8lli " RED "Philosopher %i died\n" RESET, stamp, id + 1);
 	if (status == FINISHED && rules->dead == 0)
-		printf("%-8lli All philosophers have been fed %i times\n", timestamp,
-			rules->eat_count);
+		printf("%-8lli " GREEN "All philosophers have been fed %i times.\n"
+			RESET, stamp, rules->eat_count);
 	pthread_mutex_unlock(&rules->log);
 }
