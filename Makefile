@@ -6,11 +6,11 @@
 #    By: avuorio <avuorio@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/10/06 11:33:02 by avuorio       #+#    #+#                  #
-#    Updated: 2021/11/03 15:05:51 by avuorio       ########   odam.nl          #
+#    Updated: 2021/11/04 11:28:26 by avuorio       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= philo_one
+NAME		= philo
 
 SRC_FILES	= main.c \
 				initialise.c \
